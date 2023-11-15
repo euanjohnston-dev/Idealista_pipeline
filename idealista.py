@@ -44,7 +44,7 @@ def _create_auth_headers(api_secret_key):
     return headers
 
 @dlt.resource(write_disposition="append")
-def property_analytics_resource():
+def property_analytics_resource(api_secret_key):
     
     api_secret_key = get_api_secret_key()
 
