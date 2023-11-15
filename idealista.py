@@ -16,7 +16,6 @@ def access_secret_version(project_id, secret_id, version_id):
     return response.payload.data.decode('UTF-8')
 
 
-
 @dlt.source
 def property_analytics_source(api_secret_key=None):
     # Set the default value inside the function
