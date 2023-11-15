@@ -5,7 +5,7 @@ from google.cloud import secretmanager_v1
 from google.auth.transport.requests import Request
 import google.auth
 import requests
-
+import os
 
 def get_api_secret_key():
     return json.loads(access_secret_version("propertyanalytics-404010", "keyfile", version_id="3"))
@@ -93,7 +93,7 @@ def property_analytics_resource():
 
 def idealista_run():
     # configure the pipeline with your destination details
-
+    bucket_url = os.environ.get('BUCKET_URL')
     
     pipeline = dlt.pipeline(
         pipeline_name='idealista_list',
