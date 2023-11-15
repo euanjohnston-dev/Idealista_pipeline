@@ -29,7 +29,7 @@ def property_analytics_source(api_secret_key=None):
 
     return property_analytics_resource(api_secret_key)
 
-def _create_auth_headers():
+def _create_auth_headers(api_secret_key):
     # Set the default value inside the function
 
     try:
