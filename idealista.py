@@ -27,7 +27,7 @@ def property_analytics_source(api_secret_key=None):
     # Set the default value inside the function
     api_secret_key = get_api_secret_key()
 
-    return property_analytics_resource(api_secret_key)
+    return property_analytics_resource()
 
 def _create_auth_headers(api_secret_key):
     # Set the default value inside the function
@@ -44,7 +44,7 @@ def _create_auth_headers(api_secret_key):
     return headers
 
 @dlt.resource(write_disposition="append")
-def property_analytics_resource(api_secret_key):
+def property_analytics_resource():
     
     api_secret_key = get_api_secret_key()
 
