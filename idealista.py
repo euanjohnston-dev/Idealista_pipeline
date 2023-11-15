@@ -3,6 +3,7 @@ from google.auth.transport.requests import Request
 import dlt
 from google.cloud import secretmanager_v1
 from google.auth.transport.requests import Request
+import google.auth
 
 
 def access_secret_version(project_id, secret_id, version_id):
