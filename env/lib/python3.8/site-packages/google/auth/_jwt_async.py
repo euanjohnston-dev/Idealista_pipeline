@@ -43,7 +43,7 @@ NOTE: This async support is experimental and marked internal. This surface may
 change in minor releases.
 """
 
-from google.auth import _credentials_async
+import google.auth
 from google.auth import jwt
 
 
@@ -91,7 +91,9 @@ def decode(token, certs=None, verify=True, audience=None):
 
 
 class Credentials(
-    jwt.Credentials, _credentials_async.Signing, _credentials_async.Credentials
+    jwt.Credentials,
+    google.auth._credentials_async.Signing,
+    google.auth._credentials_async.Credentials,
 ):
     """Credentials that use a JWT as the bearer token.
 
@@ -144,7 +146,9 @@ class Credentials(
 
 
 class OnDemandCredentials(
-    jwt.OnDemandCredentials, _credentials_async.Signing, _credentials_async.Credentials
+    jwt.OnDemandCredentials,
+    google.auth._credentials_async.Signing,
+    google.auth._credentials_async.Credentials,
 ):
     """On-demand JWT credentials.
 
