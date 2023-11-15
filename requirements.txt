@@ -2,3 +2,4 @@ dlt[bigquery]>=0.3.24
 google-auth==2.3.3
 google-cloud-secret-manager==2.7.0
 requests==2.26.0
+dlt
