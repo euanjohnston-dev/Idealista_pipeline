@@ -1,7 +1,7 @@
 from idealista import idealista_run
 import base64
 
-def pipeline_idealista(data, context):
+def idealista_pipeline(data, context):
   
   message = base64.b64decode(data['data']).decode('utf-8')
   print(f'Hello, {message}!')
