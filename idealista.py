@@ -4,6 +4,11 @@ import dlt
 from google.cloud import secretmanager_v1
 from google.auth.transport.requests import Request
 import google.auth
+import requests
+
+
+def get_api_secret_key():
+    return json.loads(access_secret_version("propertyanalytics-404010", "keyfile", version_id="3"))
 
 
 def access_secret_version(project_id, secret_id, version_id):
@@ -20,26 +25,29 @@ def access_secret_version(project_id, secret_id, version_id):
 @dlt.source
 def property_analytics_source(api_secret_key=None):
     # Set the default value inside the function
-    if api_secret_key is None:
-        api_secret_key = json.loads(access_secret_version("propertyanalytics-404010", "keyfile", version_id="3"))
+    api_secret_key = get_api_secret_key()
+
     return property_analytics_resource(api_secret_key)
 
-def _create_auth_headers(api_secret_key=None):
+def _create_auth_headers():
     # Set the default value inside the function
-    if api_secret_key is None:
-        api_secret_key = json.loads(access_secret_version("propertyanalytics-404010", "keyfile", version_id="3"))
 
-    credentials, _ = google.auth.default()
-    auth_request = Request(credentials)
-    credentials.refresh(auth_request)
+    try:
+        credentials, _ = google.auth.default()
+        auth_request = Request(credentials)
+        credentials.refresh(auth_request)
+        headers = {"Authorization": f"Bearer {credentials.token}"}
+    except Exception as e:
+        print(f"Error during authentication: {e}")
 
     headers = {"Authorization": f"Bearer {credentials.token}"}
     return headers
 
 @dlt.resource(write_disposition="append")
-def property_analytics_resource(api_secret_key=None):
-    if api_secret_key is None:
-        api_secret_key = json.loads(access_secret_version("propertyanalytics-404010", "keyfile", version_id="3"))
+def property_analytics_resource():
+    
+    api_secret_key = get_api_secret_key()
+
     headers = _create_auth_headers(api_secret_key)
 
     # Check if authentication headers look fine
@@ -69,9 +77,16 @@ def property_analytics_resource(api_secret_key=None):
             "locale": "en",
             "country": "pt"
         }
-        response = requests.get(url, headers={**headers, **rapidapi_headers}, params=querystring)
-        response.raise_for_status()
-        data.append(response.json())
+
+
+
+        try:
+            response = requests.get(url, headers={**headers, **rapidapi_headers}, params=querystring)
+            response.raise_for_status()
+            data.append(response.json())
+        except requests.exceptions.RequestException as e:
+            print(f"Error during API request: {e}")
+            
         page += 1
 
     yield data
