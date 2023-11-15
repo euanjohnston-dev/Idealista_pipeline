@@ -1,0 +1,4 @@
+dlt[bigquery]>=0.3.24
+google-auth==2.3.3
+google-cloud-secret-manager==2.7.0
+dlt==0.5.0
