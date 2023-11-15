@@ -7,6 +7,3 @@ dlthub_telemetry = true
 
 [destination.bigquery]
 location="europe-west3"
-
-[destination.filesystem]
-bucket_url = "gs://property-bucket-1" #bucket name

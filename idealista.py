@@ -5,6 +5,8 @@ from google.cloud import secretmanager_v1
 from google.auth.transport.requests import Request
 import google.auth
 import requests
+import os
+from dlt import Context
 
 
 def get_api_secret_key():
@@ -93,6 +95,12 @@ def property_analytics_resource():
 
 def idealista_run():
     # configure the pipeline with your destination details
+    
+    bucket_url = os.environ.get('BUCKET_URL')
+    
+    # Set the bucket_url in the dlt context
+    Context.filesystem_bucket_url = bucket_url
+    
     pipeline = dlt.pipeline(
         pipeline_name='idealista_list',
         destination='bigquery', 
