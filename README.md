@@ -15,10 +15,10 @@ My partner and I are looking at potentially buying a home abroad and have strugg
 
 ## Solution
 The series of transformations run highliht amongst other things potential duplicate listings to be checked. I have connected the output from the dbt model 'dim_duplicates_to_check.sql' to a gsheet which would then be uploaded to an further bigquery schema 'sheets_check' via an additional dlt pipeline. De-duplicating these listings allows for the core analysis to take place being the able to analyse accurately: 
-    1) Number of active unique listings.
-    2) Properties added and removed.
-    3) Number of multiple listed properties. 
-    4) Average price/sqm data.
+1. Number of active unique listings.
+2. Properties added and removed.
+3. Number of multiple listed properties. 
+4. Average price/sqm data.
 
 I have analysed the output in a data studio dashboard:
 https://lookerstudio.google.com/reporting/d13f508f-5101-49af-95bb-e0db1eb54483/page/p_0hgvz5kibd  
@@ -48,4 +48,3 @@ https://lookerstudio.google.com/reporting/d13f508f-5101-49af-95bb-e0db1eb54483/p
 e.g from the output of the property id's saved from the properties/list api above use this list to periodically save the subsequent details from the properties/detail api. When message = "ad not found" -> assume sold.
 
 This would be hugely valuable information as Portugal and in fact most of Europe does not have a multiple listng service.
-
