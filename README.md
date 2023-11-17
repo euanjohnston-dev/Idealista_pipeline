@@ -14,7 +14,7 @@ This project focuses on extracting data from Idealista's API using the DLT packa
 My partner and I are looking at potentially buying a home abroad and have struggled to cut through the noise to get useful buy side information. Whilst in our target area of Portugal the idealista site does provide a lot of good information unfortunately the site lists multiple duplicate properties making it hard to see the true depth of the market or run analysis on average property prices etc. 
 
 ## Solution
-The series of transformations run highliht amongst other things potential duplicate listings to be checked. I have connected the output from the dbt model 'dim_duplicates_to_check.sql' to a gsheet which would then be uploaded to an further bigquery schema 'sheets_check' via an additional dlt pipeline. De-duplicating these listings allows for the core analysis to take place being the able to analyse accurately: 
+The series of transformations run highlight amongst other things potential duplicate listings to be checked. I have connected the output from the dbt model 'dim_duplicates_to_check.sql' to a gsheet which would then be uploaded to an further bigquery schema 'sheets_check' via an additional dlt pipeline. De-duplicating these listings allows for the core analysis to take place being the able to analyse accurately: 
 1. Number of active unique listings.
 2. Properties added and removed.
 3. Number of multiple listed properties. 
