@@ -6,7 +6,7 @@ from google.auth.transport.requests import Request
 import google.auth
 import requests
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 def get_api_secret_key():
     return json.loads(access_secret_version("propertyanalytics-404010", "keyfile", version_id="3"))
