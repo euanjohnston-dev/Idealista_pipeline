@@ -9,3 +9,4 @@ secrets.toml
 *.duckdb
 *.wal
 env/
+test.py

@@ -6,6 +6,7 @@ from google.auth.transport.requests import Request
 import google.auth
 import requests
 import os
+from dotenv import load_dotenv
 
 def get_api_secret_key():
     return json.loads(access_secret_version("propertyanalytics-404010", "keyfile", version_id="3"))
@@ -46,6 +47,8 @@ def _create_auth_headers(api_secret_key):
 @dlt.resource(write_disposition="append")
 def property_analytics_resource():
     
+    # load_dotenv()
+
     api_secret_key = get_api_secret_key()
 
     headers = _create_auth_headers(api_secret_key)
@@ -55,18 +58,21 @@ def property_analytics_resource():
 
     url = "https://idealista2.p.rapidapi.com/properties/list"
 
-    # Use a different variable name to avoid overwriting the headers
+
+    rapidapi_key = os.environ.get("RAPIDAPI_KEY")
+    rapidapi_host = os.environ.get("RAPIDAPI_HOST")
+
+
     rapidapi_headers = {
-        "X-RapidAPI-Key": "273f1c69a5mshe3d37237672b857p100581jsn241dc8ac149d",
-        "X-RapidAPI-Host": "idealista2.p.rapidapi.com"
+        "X-RapidAPI-Key": rapidapi_key, #rapidapi_key,
+        "X-RapidAPI-Host": rapidapi_host #rapidapi_host
     }
 
     data = []
     page = 1
     
     # (make dynamic as currently isn't)
-    while page <= 6:
-        
+    while True:
         querystring = {
             "locationId": "0-EU-PT-08-03",
             "locationName": "Aljezur, Faro",
@@ -78,18 +84,24 @@ def property_analytics_resource():
             "country": "pt"
         }
 
-
-
         try:
             response = requests.get(url, headers={**headers, **rapidapi_headers}, params=querystring)
             response.raise_for_status()
+            element_list = response.json().get('elementList', [])
+
+            if not element_list:
+                break 
+                # If element list is empty, break out of the loop
+            
             data.append(response.json())
+
         except requests.exceptions.RequestException as e:
             print(f"Error during API request: {e}")
             
         page += 1
-
+    
     yield data
+
 
 def idealista_run():
     # configure the pipeline with your destination details
