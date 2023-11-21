@@ -13,9 +13,9 @@ def send_slack_message(message, channel='#test', error_message=None):
     client.chat_postMessage(channel=channel, text=message)
 
 def pipeline_success():
-    send_slack_message('Pipeline ran successfully')
+    send_slack_message('Idealista Pipeline ran successfully')
     return "Pipeline run successfully!"
 
 def pipeline_failure(error_message):
-    send_slack_message('Pipeline failed', error_message=error_message)
+    send_slack_message('Idealista Pipeline failed', error_message=error_message)
     return f"Pipeline failed with error: {error_message}" if error_message else "Pipeline failed"
