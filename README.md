@@ -5,10 +5,15 @@ This project focuses on extracting data from Idealista's API using the DLT packa
 
 - The DLT package can be taken to be performing the EtL from EtLT as it is directly unpacking the json in the destination with an infered schema.
 
-## Connected REPO
+## Connected REPOS
 - DBT models to be executed as a separate cloud function (The T in EtLT):
 - https://github.com/euanjohnston92-berlin/idealista_dbt_pipeline
+- Gsheets checking pipeline (for manual verification of property duplicates)
+- https://github.com/euanjohnston92-berlin/gsheets_check_pipeline
 
+## Connected Documents
+- Sample sheets checking file:
+https://docs.google.com/spreadsheets/d/199qkCzNyFEOFWVZcBou1n4Fh-3x1vBVpUfPj_ElurlA
 
 ## Problem Statement
 My partner and I are looking at potentially buying a home abroad and have struggled to cut through the noise to get useful buy side information. Whilst in our target area of Portugal the idealista site does provide a lot of good information unfortunately the site lists multiple duplicate properties making it hard to see the true depth of the market or run analysis on average property prices etc. 
@@ -45,6 +50,6 @@ https://lookerstudio.google.com/reporting/d13f508f-5101-49af-95bb-e0db1eb54483/p
 ## Contributing and further development
 
 - Idealista does not actively highlight the recent properties removed (assumed sold). This could be tracked via their api if that data was stored.
-e.g from the output of the property id's saved from the properties/list api above use this list to periodically save the subsequent details from the properties/detail api. When message = "ad not found" -> assume sold.
+e.g from the output of the property id's saved from the properties/list api above use this list to periodically save the subsequent details from the properties/detail api. When message = "ad not found" -> assume sold (if combined with other listings).
 
 This would be hugely valuable information as Portugal and in fact most of Europe does not have a multiple listng service.
