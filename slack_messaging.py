@@ -4,7 +4,7 @@ import os
 def setup_slack_client():
     return slack.WebClient(token=os.environ['SLACK_TOKEN'])
 
-def send_slack_message(message, channel='#test', error_message=None):
+def send_slack_message(message, channel='#idealista-tracking', error_message=None):
     client = setup_slack_client()
 
     if error_message:
