@@ -8,6 +8,7 @@ This project focuses on extracting data from Idealista's API using the DLT packa
 ## Connected REPOS
 - DBT models to be executed as a separate cloud function (The T in EtLT):
 - https://github.com/euanjohnston92-berlin/idealista_dbt_pipeline
+
 - Gsheets checking pipeline (for manual verification of property duplicates)
 - https://github.com/euanjohnston92-berlin/gsheets_check_pipeline
 
